@@ -10,13 +10,33 @@ public class InteractionController : MonoBehaviour
     RaycastHit hitinfo;
     [SerializeField] GameObject go_noraml_crosshair;
     [SerializeField] GameObject go_Interactive_crosshair;
+    [SerializeField] GameObject go_Crosshair;
+    [SerializeField] GameObject go_Cursor;
 
     bool isContact = false;
 
+    public static bool isInteract = false;
+
+    [SerializeField] ParticleSystem ps_question_Effect;
+    
+    DialogueManager theDm;
+
+    public void HideUI()
+    {
+        go_Crosshair.SetActive(false);
+        go_Cursor.SetActive(false);
+
+    }
+
+
+    private void Start() {
+        theDm = FindObjectOfType<DialogueManager>();
+    }
 
     void Update()
     {
         CheckObj();
+        ClickLeftBtn();
     }
 
     void CheckObj()
@@ -68,6 +88,46 @@ public class InteractionController : MonoBehaviour
             go_noraml_crosshair.SetActive(true);
         }
 
+    }
+
+
+    void ClickLeftBtn()
+    {   
+        if(!isInteract)
+        {
+                    //마우스 좌클릭 감지
+            if(Input.GetMouseButtonDown(0))
+            {
+                if(isContact)
+                {
+                    Interact();
+                }
+            }
+        }
+    }
+
+    void Interact()
+    {
+        isInteract = true;
+
+        ps_question_Effect.gameObject.SetActive(true);
+
+        Vector3 t_targetPos = hitinfo.transform.position;
+        ps_question_Effect.GetComponent<QuestionEffect>().SetTartget(t_targetPos);
+
+        ps_question_Effect.transform.position = cam.transform.position;
+
+        StartCoroutine(waitCollision());
+       
+
+    }
+
+    IEnumerator waitCollision()
+    {
+        yield return new WaitUntil(()=>QuestionEffect.isCollide);
+        QuestionEffect.isCollide = false;
+
+        theDm.ShowDialogue();
     }
 
 
