@@ -20,12 +20,44 @@ public class Playercontroller : MonoBehaviour
     float CurrentAngle_X;
     float CurrentAngle_Y;
 
+    [SerializeField] GameObject go_NotCamDown;
+    [SerializeField] GameObject go_NotCamUp;
+    [SerializeField] GameObject go_NotCamLeft;
+    [SerializeField] GameObject go_NotCamRight;
+
+    float OriginPosY;
+
+    private void Start() {
+        OriginPosY = TF_Cam.localPosition.y;
+    }
+
     void Update()
     {
         CrosshairMoving();
         ViewMoving();
         KeyViewMoving();
         CameraLimit();
+        NotCamUI();
+    }
+
+    void NotCamUI()
+    {
+        go_NotCamDown.SetActive(false);
+        go_NotCamUp.SetActive(false);
+        go_NotCamLeft.SetActive(false);
+        go_NotCamRight.SetActive(false);
+
+        if(CurrentAngle_Y >= lookLimit_X)
+            go_NotCamRight.SetActive(true);
+        else if(CurrentAngle_Y<= -lookLimit_X)
+            go_NotCamLeft.SetActive(true);    
+        else if(CurrentAngle_X<=-lookLimit_Y)
+            go_NotCamUp.SetActive(true);
+        else if(CurrentAngle_X>=lookLimit_Y)
+            go_NotCamDown.SetActive(true);        
+
+        
+
     }
 
     void CameraLimit()
@@ -48,7 +80,7 @@ public class Playercontroller : MonoBehaviour
         if(TF_Cam.localPosition.y >= CamBoundary.y+1)
         {
             TF_Cam.localPosition = new Vector3(TF_Cam.localPosition.x
-                                        ,CamBoundary.y+1
+                                        ,CamBoundary.y+OriginPosY
                                         ,TF_Cam.localPosition.z);
 
         }
@@ -56,7 +88,7 @@ public class Playercontroller : MonoBehaviour
         else if(TF_Cam.localPosition.y <= 1-CamBoundary.y)
         {
             TF_Cam.localPosition = new Vector3(TF_Cam.localPosition.x
-                                        ,1-CamBoundary.y
+                                        ,OriginPosY-CamBoundary.y
                                         ,TF_Cam.localPosition.z);
 
         }
