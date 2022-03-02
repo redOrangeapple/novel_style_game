@@ -210,7 +210,9 @@ public class InteractionController : MonoBehaviour
         yield return new WaitUntil(()=>QuestionEffect.isCollide);
         QuestionEffect.isCollide = false;
 
-        theDm.ShowDialogue();
+        // hitinfo.transform.GetComponent<InteractionEvent>().GetDialogue();
+
+        theDm.ShowDialogue(hitinfo.transform.GetComponent<InteractionEvent>().GetDialogue());
     }
 
 

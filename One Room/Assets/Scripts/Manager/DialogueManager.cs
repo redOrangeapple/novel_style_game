@@ -11,7 +11,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] Text txt_Dialgoue;
     [SerializeField] Text txt_Name;
 
-    bool isDialogue = false;
+    Dialogue[] dialogues;
+
+    //bool isDialogue = false;
 
     InteractionController theIC;
 
@@ -21,12 +23,14 @@ public class DialogueManager : MonoBehaviour
 
 
 
-    public void ShowDialogue()
+    public void ShowDialogue(Dialogue[] p_dialogues)
     {
         txt_Dialgoue.text="";
         txt_Name.text="";
 
         theIC.HideUI();
+
+        dialogues = p_dialogues;
 
         SettingUI(true);
 
