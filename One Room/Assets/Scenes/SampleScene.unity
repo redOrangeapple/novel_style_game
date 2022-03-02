@@ -13670,6 +13670,7 @@ MonoBehaviour:
   go_DialogueNameBar: {fileID: 524942943}
   txt_Dialgoue: {fileID: 1688699634}
   txt_Name: {fileID: 1138250543}
+  textDelay: 0.05
 --- !u!1 &1454834867
 GameObject:
   m_ObjectHideFlags: 0

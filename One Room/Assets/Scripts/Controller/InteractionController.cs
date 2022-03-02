@@ -29,11 +29,13 @@ public class InteractionController : MonoBehaviour
     
     DialogueManager theDm;
 
-    public void HideUI()
+    public void SettingUI(bool _p_flag)
     {
-        go_Crosshair.SetActive(false);
-        go_Cursor.SetActive(false);
-        go_TargetNamebar.SetActive(false);
+        go_Crosshair.SetActive(_p_flag);
+        go_Cursor.SetActive(_p_flag);
+        go_TargetNamebar.SetActive(_p_flag);
+
+        isInteract = !_p_flag;
 
     }
 
