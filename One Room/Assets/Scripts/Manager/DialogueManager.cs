@@ -97,14 +97,57 @@ public class DialogueManager : MonoBehaviour
         string t_ReplaceText = dialogues[lineCount].contexts[ConTextCount]; // '`' --> ',' 로 바꿔주는놈 
 
         t_ReplaceText = t_ReplaceText.Replace("`",",");
+         t_ReplaceText = t_ReplaceText.Replace("\\n","\n");
 
         //txt_Dialgoue.text = t_ReplaceText;
 
-        txt_Name.text = dialogues[lineCount].name; 
+        
+
+        bool t_white = false;
+        bool t_yellow = false;
+        bool t_cyan = false;
+
+
+        bool t_ignore= false;
+
 
         for(int i = 0 ; i< t_ReplaceText.Length;i++)
         {
-            txt_Dialgoue.text += t_ReplaceText[i];
+            switch(t_ReplaceText[i])
+            {
+                case 'ⓦ': t_white = true;
+                           t_yellow = false;
+                           t_cyan = false;
+                           t_ignore = true;
+                break;
+
+                case 'ⓨ': t_white = false;
+                           t_yellow = true;
+                           t_cyan  = false;
+                           t_ignore = true;
+                break; 
+                case 'ⓒ': t_white  = false;
+                           t_yellow = false;
+                           t_cyan   = true;
+                           t_ignore = true;
+                break; 
+            }
+            //https://docs.google.com/spreadsheets/d/1tP7aNJ2_vkWzmn3UsT2KTdrw5uykZc_0mzFbRVMRx5c/edit#gid=0
+            string t_letter = t_ReplaceText[i].ToString();
+
+            if(!t_ignore)
+            {
+                if(t_white == true)
+                {t_letter= "<color=#ffffff>"+ t_letter +"</color>";}
+                else if(t_yellow == true){t_letter = "<color=#FFFF00>"+ t_letter +"</color>";}
+                else if(t_cyan == true) {t_letter = "<color=#5DDED4>"+ t_letter +"</color>";}
+
+
+                txt_Dialgoue.text += t_letter;
+
+            }
+            t_ignore = false;
+            //txt_Dialgoue.text += t_ReplaceText[i];
             yield return new WaitForSeconds(textDelay);
 
         }
@@ -121,7 +164,21 @@ public class DialogueManager : MonoBehaviour
     void SettingUI(bool _p_flag)
     {
         go_DialogueBar.SetActive(_p_flag);
-        go_DialogueNameBar.SetActive(_p_flag);
+
+        if(_p_flag)
+        {
+            if(dialogues[lineCount].name=="")
+            {
+                 go_DialogueNameBar.SetActive(false);
+            }
+            else
+            {
+                go_DialogueNameBar.SetActive(true);
+                txt_Name.text = dialogues[lineCount].name; 
+            }
+
+        }
+     
 
     }
 
