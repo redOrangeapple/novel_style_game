@@ -24,8 +24,14 @@ public class DialogueManager : MonoBehaviour
 
     InteractionController theIC;
 
+    CameraController theCam;
+
+
+
     private void Start() {
         theIC = FindObjectOfType<InteractionController>();
+
+        theCam = FindObjectOfType<CameraController>();
     }   
 
     private void Update() {
@@ -46,7 +52,7 @@ public class DialogueManager : MonoBehaviour
                          ConTextCount = 0 ;
                          if(++lineCount < dialogues.Length)
                          {
-
+                            theCam.CameraTargeting(dialogues[lineCount].tf_Target);
                             StartCoroutine(TypeWriter());
                          }
                          else
@@ -75,7 +81,7 @@ public class DialogueManager : MonoBehaviour
         theIC.SettingUI(false);
 
         dialogues = p_dialogues;
-
+        theCam.CameraTargeting(dialogues[lineCount].tf_Target);
         StartCoroutine(TypeWriter());
     }
 

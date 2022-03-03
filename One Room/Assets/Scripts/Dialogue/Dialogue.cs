@@ -4,12 +4,14 @@ using UnityEngine;
 
 [System.Serializable]
 public class Dialogue
-{
-    [Tooltip("대사를 하는 캐릭터의 이름")]
-    public string name;
+{   
+    [Header("카메라가 타겟팅할 대상")]
+    public Transform tf_Target;
 
-    [Tooltip("대사")]
-    public string[] contexts;
+    [HideInInspector]
+    public string name;
+    [HideInInspector]
+      public string[] contexts;
 }
 
 [System.Serializable]
