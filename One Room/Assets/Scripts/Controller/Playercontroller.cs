@@ -27,6 +27,12 @@ public class Playercontroller : MonoBehaviour
 
     float OriginPosY;
 
+    public void ResetAngle()
+    {
+        CurrentAngle_X = 0 ; 
+        CurrentAngle_Y = 0 ;
+    }
+
     private void Start() {
         OriginPosY = TF_Cam.localPosition.y;
     }

@@ -214,6 +214,7 @@ public class InteractionController : MonoBehaviour
 
         // hitinfo.transform.GetComponent<InteractionEvent>().GetDialogue();
 
+        Debug.Log("hitinfo 위치 " + " "+hitinfo.point);
         theDm.ShowDialogue(hitinfo.transform.GetComponent<InteractionEvent>().GetDialogue());
     }
 

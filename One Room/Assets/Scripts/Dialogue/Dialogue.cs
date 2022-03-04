@@ -2,10 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+public enum CamerType
+{
+    ObjFront,Reset,
+
+
+}
+
+
 [System.Serializable]
 public class Dialogue
 {   
     [Header("카메라가 타겟팅할 대상")]
+    public CamerType camerType;
     public Transform tf_Target;
 
     [HideInInspector]

@@ -1287,12 +1287,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619506663}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.46, y: 1.97, z: 4.63}
+  m_LocalPosition: {x: 0.46, y: 2.35, z: 4.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1498844281}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &619506665
 BoxCollider:
@@ -1338,16 +1338,20 @@ MonoBehaviour:
     name: 
     line: {x: 1, y: 4}
     dialogues:
-    - tf_Target: {fileID: 619506664}
+    - camerType: 0
+      tf_Target: {fileID: 619506664}
       name: 
       contexts: []
-    - tf_Target: {fileID: 0}
+    - camerType: 0
+      tf_Target: {fileID: 1335762174}
       name: 
       contexts: []
-    - tf_Target: {fileID: 0}
+    - camerType: 0
+      tf_Target: {fileID: 1279760775}
       name: 
       contexts: []
-    - tf_Target: {fileID: 0}
+    - camerType: 0
+      tf_Target: {fileID: 619506664}
       name: 
       contexts: []
 --- !u!1 &626454207
@@ -1602,7 +1606,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &759910373
 MonoBehaviour:
@@ -7106,7 +7110,7 @@ Transform:
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &982373592
 MonoBehaviour:
@@ -12743,7 +12747,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &1081094272
 MonoBehaviour:
@@ -12857,7 +12861,7 @@ RectTransform:
   - {fileID: 1490485390}
   - {fileID: 845751436}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -13481,16 +13485,20 @@ MonoBehaviour:
     name: 
     line: {x: 1, y: 4}
     dialogues:
-    - tf_Target: {fileID: 1279760775}
+    - camerType: 0
+      tf_Target: {fileID: 619506664}
       name: 
       contexts: []
-    - tf_Target: {fileID: 0}
+    - camerType: 0
+      tf_Target: {fileID: 0}
       name: 
       contexts: []
-    - tf_Target: {fileID: 0}
+    - camerType: 0
+      tf_Target: {fileID: 0}
       name: 
       contexts: []
-    - tf_Target: {fileID: 0}
+    - camerType: 0
+      tf_Target: {fileID: 0}
       name: 
       contexts: []
 --- !u!114 &1279760773
@@ -13534,7 +13542,7 @@ Transform:
   m_Children:
   - {fileID: 1855970886}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 113.8, z: 0}
 --- !u!4 &1321699337 stripped
 Transform:
@@ -13653,16 +13661,20 @@ MonoBehaviour:
     name: 
     line: {x: 1, y: 4}
     dialogues:
-    - tf_Target: {fileID: 1335762174}
+    - camerType: 0
+      tf_Target: {fileID: 619506664}
       name: 
       contexts: []
-    - tf_Target: {fileID: 0}
+    - camerType: 0
+      tf_Target: {fileID: 0}
       name: 
       contexts: []
-    - tf_Target: {fileID: 0}
+    - camerType: 0
+      tf_Target: {fileID: 0}
       name: 
       contexts: []
-    - tf_Target: {fileID: 0}
+    - camerType: 0
+      tf_Target: {fileID: 0}
       name: 
       contexts: []
 --- !u!114 &1335762172
@@ -13706,7 +13718,7 @@ Transform:
   m_Children:
   - {fileID: 1437841542}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 58.01, z: 0}
 --- !u!1 &1348020727
 GameObject:
@@ -14229,7 +14241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498844280}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: -0.759, z: 0}
+  m_LocalPosition: {x: 0, y: -1.11, z: 0}
   m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_Children: []
   m_Father: {fileID: 619506664}
