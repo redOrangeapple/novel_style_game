@@ -6,7 +6,12 @@ using UnityEngine;
 
 public enum CamerType
 {
-    ObjFront,Reset,
+    ObjFront,
+    Reset,
+    FadeOUt,
+    FadeIn,
+    Flashout,
+    FlashIn,
 
 
 }
@@ -23,6 +28,14 @@ public class Dialogue
     public string name;
     [HideInInspector]
       public string[] contexts;
+
+    [HideInInspector]
+    public string[] spriteName;
+
+    [HideInInspector]
+    public string[] VoiceName;
+
+
 }
 
 [System.Serializable]

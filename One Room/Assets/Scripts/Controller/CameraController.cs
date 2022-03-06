@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour
 
     Playercontroller thePlayer;
 
+    Coroutine coroutine;
+
     private void Start() {
         theIC = FindObjectOfType<InteractionController>();
         thePlayer = FindObjectOfType<Playercontroller>();
@@ -29,19 +31,23 @@ public class CameraController : MonoBehaviour
 
     public void CameraTargeting(Transform P_Target,float P_CamSpeed=0.02f,bool p_isReset = false, bool p_isFinish = false)
     {
-        StopAllCoroutines();
+        
 
         if(!p_isFinish)
         {
             if(P_Target != null)
             {
-                StartCoroutine(CameraTargetingCoroutine(P_Target,P_CamSpeed));
+                StopAllCoroutines(); 
+                coroutine =  StartCoroutine(CameraTargetingCoroutine(P_Target,P_CamSpeed));
             }
 
         }
         else 
         {
-
+            if(coroutine!= null)
+            {
+                StopCoroutine(coroutine);
+            }
               StartCoroutine(CameraResetCoroutine(P_CamSpeed,p_isFinish));
 
         }

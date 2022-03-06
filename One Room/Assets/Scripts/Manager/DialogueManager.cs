@@ -25,6 +25,9 @@ public class DialogueManager : MonoBehaviour
     InteractionController theIC;
 
     CameraController theCam;
+    SpriteManager theSM;
+
+    SplashManager theSplash;
 
 
 
@@ -32,6 +35,10 @@ public class DialogueManager : MonoBehaviour
         theIC = FindObjectOfType<InteractionController>();
 
         theCam = FindObjectOfType<CameraController>();
+
+        theSM = FindObjectOfType<SpriteManager>();
+
+        theSplash = FindObjectOfType<SplashManager>();
     }   
 
     private void Update() {
@@ -52,7 +59,7 @@ public class DialogueManager : MonoBehaviour
                          ConTextCount = 0 ;
                          if(++lineCount < dialogues.Length)
                          {
-                             CameraTargettinType();
+                             StartCoroutine(CameraTargettinType());
                          }
                          else
                          {
@@ -86,15 +93,36 @@ public class DialogueManager : MonoBehaviour
 
         // theCam.CameraTargeting(dialogues[lineCount].tf_Target);
         // StartCoroutine(TypeWriter());
+         StartCoroutine(CameraTargettinType());
 
-        CameraTargettinType();
     }
 
 
-    void CameraTargettinType()
+    IEnumerator CameraTargettinType()
     {
         switch(dialogues[lineCount].camerType)
         {
+            case CamerType.FadeIn :  ; SplashManager.isfinished = false; 
+                                    StartCoroutine(theSplash.FadeIn(false,true));
+                                    yield return new WaitUntil(()=>SplashManager.isfinished);
+                                    break;
+             case CamerType.FadeOUt :  SplashManager.isfinished = false; 
+                                    StartCoroutine(theSplash.FadeOut(false,true));
+                                    yield return new WaitUntil(()=>SplashManager.isfinished);
+                                    break;
+
+            case CamerType.FlashIn : ; SplashManager.isfinished = false; 
+                                    StartCoroutine(theSplash.FadeIn(true,true));
+                                    yield return new WaitUntil(()=>SplashManager.isfinished);
+                                    break;
+
+
+            case CamerType.Flashout : SplashManager.isfinished = false; 
+                                    StartCoroutine(theSplash.FadeOut(true,true));
+                                    yield return new WaitUntil(()=>SplashManager.isfinished);
+                                    break;
+
+
             case  CamerType.ObjFront:  theCam.CameraTargeting(dialogues[lineCount].tf_Target);
             break;
 
@@ -119,10 +147,35 @@ public class DialogueManager : MonoBehaviour
         SettingUI(false);
     }
 
+    void ChangeSprite()
+    {
+        if(dialogues[lineCount].spriteName[ConTextCount]!="")
+        {
+             StartCoroutine(theSM.SpriteChangeCoroutine(
+                            dialogues[lineCount].tf_Target,
+                            dialogues[lineCount].spriteName[ConTextCount]));
+
+        }
+
+
+    }
+
+    void PlaySound()
+    {
+        if(dialogues[lineCount].VoiceName[ConTextCount]!="")
+        {
+            SoundManager.instance.PlaySound(dialogues[lineCount].VoiceName[ConTextCount],2);
+
+        }
+
+
+    }
+
      IEnumerator TypeWriter()
     {
         SettingUI(true);
-
+        ChangeSprite();
+        PlaySound();
         string t_ReplaceText = dialogues[lineCount].contexts[ConTextCount]; // '`' --> ',' 로 바꿔주는놈 
 
         t_ReplaceText = t_ReplaceText.Replace("`",",");
@@ -160,6 +213,12 @@ public class DialogueManager : MonoBehaviour
                            t_cyan   = true;
                            t_ignore = true;
                 break; 
+                case  '①': SoundManager.instance.PlaySound("Emotion1",1);  t_ignore = true; 
+                            StartCoroutine(theSplash.Splash());
+                         break;
+                case  '②': SoundManager.instance.PlaySound("Emotion2",1);  t_ignore = true; 
+                    StartCoroutine(theSplash.Splash());
+                 break;
             }
             //https://docs.google.com/spreadsheets/d/1tP7aNJ2_vkWzmn3UsT2KTdrw5uykZc_0mzFbRVMRx5c/edit#gid=0
             string t_letter = t_ReplaceText[i].ToString();
@@ -205,6 +264,11 @@ public class DialogueManager : MonoBehaviour
                 go_DialogueNameBar.SetActive(true);
                 txt_Name.text = dialogues[lineCount].name; 
             }
+
+        }
+        else
+        {
+            go_DialogueNameBar.SetActive(false);
 
         }
      
